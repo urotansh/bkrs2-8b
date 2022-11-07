@@ -1,0 +1,13 @@
+<% if @results.nil? %>
+  <p>検索対象は存在しません</p>
+<% else%>
+  <% if @results.name == "User" %>
+    <h2>Users search for "<%= @keyword %>"</h2>
+    <%= render 'users/index', users: @results %>
+  <% elsif @results.name == "Book" %>
+    <h2>Books search for "<%= @keyword %>"</h2>
+    <%= render 'books/index', books: @results %>
+  <% else %>
+    <p>検索対象は存在しません</p>
+  <% end %>
+<% end %>
