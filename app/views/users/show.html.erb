@@ -15,9 +15,9 @@
       <h2>Books</h2>
       <%= render 'books/index',books: @books %>
       
-      <%# 投稿数一覧/グラフ %>
+      <%# 投稿数一覧 %>
       <h2>7日分の投稿数</h2>
-      <table class="table table-bordered">
+      <table class="table table-bordered" id="book_count_table">
         <tr>
           <% @book_count_array.each_with_index do |book_count, i| %>
             <% if @book_count_array.size == (i + 1) %>
@@ -34,6 +34,56 @@
         </tr>
       </table>
       
+      <%# 投稿数グラフ %>
+      <p class="text-center">7日間の投稿数の比較</p>
+      <canvas id="myLineChart"></canvas>
+      <script>
+        /* 投稿数一覧データの取得 */
+        let table = document.getElementById('book_count_table')
+        let cells = table.querySelectorAll('th');
+        var arr = new Array();
+        cells.forEach( (cell) => arr.push(cell.innerHTML));
+        
+        /* chart.jsの設定 */
+        var ctx = document.getElementById("myLineChart");
+        var myLineChart = new Chart(ctx, {
+          /* グラフの種類 (bar、line、rader、pie、doughnut、polarArea、bubble などがある) */
+          type: 'line',
+          //データの設定
+          data: {
+            //データ項目のラベル
+              labels: arr,
+              //データセット
+              datasets: [{
+                // グラフの線、0:直線, 0より大きい:曲線
+                  tension: 0.5,
+                  fill: false,
+                  //凡例
+                  label: "投稿した本の数",
+                  //背景色
+                  backgroundColor: "rgba(54, 162, 235, 0.2)",
+                  //枠線の色
+                  borderColor: "rgb(54, 162, 235)",
+                  //グラフのデータ
+                  data: <%= @book_count_array %>
+              }]
+          },
+          //オプションの設定
+          options: {
+              scales: {
+                //縦軸の設定
+                  yAxes: {
+                    //最小値を0にする
+                    beginAtZero: true,
+                    suggestedMax: 10,
+                    ticks: {
+                          stepSize: 1
+                      }
+                  }
+              }
+          }
+        });
+      </script>
     </div>
   </div>
 </div>
