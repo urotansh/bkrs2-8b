@@ -15,54 +15,6 @@
       <h2>Books</h2>
       <%= render 'books/index',books: @books %>
       
-      <%# 投稿数の前日比 %>
-      <h4>投稿数の前日比・前週比</h4>
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th>今日の投稿数</th>
-            <th>前日の投稿数</th>
-            <th>前日比</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><%= @user_today_books_size %></td>
-            <td><%= @user_yesterday_books_size %></td>
-            <td>
-              <% if (@user_today_books_size == 0 || @user_yesterday_books_size == 0) %>
-                -
-              <% else %>
-                <%= number_to_percentage(@dod, precision: 0) %>
-              <% end %>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      
-      <%# 投稿数の前週比 %>
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th>今週の投稿数</th>
-            <th>前週の投稿数</th>
-            <th>前週比</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><%= @user_this_week_books_size %></td>
-            <td><%= @user_last_week_books_size %></td>
-            <td>
-              <% if (@user_this_week_books_size == 0 || @user_last_week_books_size == 0) %>
-                -
-              <% else %>
-                <%= number_to_percentage(@wow, precision: 0) %>
-              <% end %>
-            </td>
-          </tr>
-        </tbody>
-      </table>
     </div>
   </div>
 </div>

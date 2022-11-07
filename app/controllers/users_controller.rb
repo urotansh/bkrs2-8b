@@ -5,14 +5,6 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @books = @user.books
     @book = Book.new
-    
-    @user_today_books_size = @user.today_books.size
-    @user_yesterday_books_size = @user.yesterday_books.size
-    @dod = @user_today_books_size / @user_yesterday_books_size.to_f * 100
-    
-    @user_this_week_books_size = @user.this_week_books.size
-    @user_last_week_books_size = @user.last_week_books.size
-    @wow = @user_this_week_books_size / @user_last_week_books_size.to_f * 100
   end
 
   def index
