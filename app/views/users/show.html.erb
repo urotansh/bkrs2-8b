@@ -15,6 +15,25 @@
       <h2>Books</h2>
       <%= render 'books/index',books: @books %>
       
+      <%# 投稿数一覧/グラフ %>
+      <h2>7日分の投稿数</h2>
+      <table class="table table-bordered">
+        <tr>
+          <% @book_count_array.each_with_index do |book_count, i| %>
+            <% if @book_count_array.size == (i + 1) %>
+              <th>今日</th>
+            <% else %>
+              <th><%= @book_count_array.size - (i + 1) %>日前</th>
+            <% end %>
+          <% end %>
+        </tr>
+        <tr>
+          <% @book_count_array.each_with_index do |book_count, i| %>
+            <td><%= book_count %></td>
+          <% end %>
+        </tr>
+      </table>
+      
     </div>
   </div>
 </div>
