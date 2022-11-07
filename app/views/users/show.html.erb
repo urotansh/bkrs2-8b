@@ -16,7 +16,7 @@
       <%= render 'books/index',books: @books %>
       
       <%# 投稿数一覧 %>
-      <h2>7日分の投稿数</h2>
+      <h2>7日間分の投稿数</h2>
       <table class="table table-bordered" id="book_count_table">
         <tr>
           <% @book_count_array.each_with_index do |book_count, i| %>
@@ -38,6 +38,7 @@
       <p class="text-center">7日間の投稿数の比較</p>
       <canvas id="myLineChart"></canvas>
       <script>
+      $(document).on('turbolinks:load', function () {
         /* 投稿数一覧データの取得 */
         let table = document.getElementById('book_count_table')
         let cells = table.querySelectorAll('th');
@@ -83,6 +84,7 @@
               }
           }
         });
+      });
       </script>
     </div>
   </div>
