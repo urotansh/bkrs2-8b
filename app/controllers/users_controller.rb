@@ -5,6 +5,12 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @books = @user.books
     @book = Book.new
+    
+    @book_count_array =[]
+    6.downto(0) do |f|
+      @book_count_array << @books.created_target_day(f).count
+    end
+    
   end
 
   def index
